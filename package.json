@@ -1,6 +1,7 @@
 {
   "name": "hw5",
   "version": "0.1.0",
+  "homepage": "https://bob-greg.github.io/hw5",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -39,5 +40,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "gh-pages": "^4.0.0",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.4"
   }
 }
