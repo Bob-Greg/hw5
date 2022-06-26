@@ -18,6 +18,30 @@ function App() {
             setProb(0)
             return
         }
+
+        if (diceRolls < 100000) {
+            let count = 0
+            for (let i = 0; i < diceRolls; i++) {
+                let a: number[] = []
+                for (let j = 0; j < numDice; j++) {
+                    a.push(Math.floor(Math.random() * 6) + 1)
+                }
+                let sum = 0
+                for (let j = 0; j < numDice; j++) {
+                    sum += a[j]
+                }
+                if (sum === targetVal) {
+                    count++
+                }
+                a = []
+            }
+
+            setProb(count / diceRolls)
+            return;
+        }
+
+        // I MISUNDERSTOOD THE PROBLEM AND DID THE ACTUAL CALCULATION AAAAAAAAAAAAAAAAAAH but it's a faster solution so we use it for big numbers
+
         let mult: number[] = []
         let mult1: number[] = []
         mult[0] = mult1[0] = 1
@@ -41,7 +65,7 @@ function App() {
             }
             swap()
         }
-        setProb((mult[targetVal] / Math.pow(6, numDice)) * diceRolls)
+        setProb(Math.min(1.0, (mult[targetVal] / Math.pow(6, numDice))))
     }
 
     return (
@@ -64,7 +88,7 @@ function App() {
                 setNumErr(false)
                 updateDiceProb(parseInt(str), false, targetVal, targetErr, diceRolls, diceErr, prob)
             }}/>
-            <div className={"pb-3"}>
+            <div className={"pb-3 pt-1 new-text-aqua"}>
                 { numErr &&
                     <div>^^^ Please enter a valid number of dice to roll! ^^^</div>
                 }
@@ -79,7 +103,7 @@ function App() {
                 setTargetErr(false)
                 updateDiceProb(numDice, numErr, parseInt(str), false, diceRolls, diceErr, prob)
             }}/>
-            <div className={"pb-3"}>
+            <div className={"pb-3 pt-1 new-text-aqua"}>
                 { targetErr &&
                     <div>
                         ^^^ Please enter a valid target value! ^^^
@@ -96,14 +120,14 @@ function App() {
                 setDiceErr(false)
                 updateDiceProb(numDice, numErr, targetVal, targetErr, parseInt(str), false, prob)
             }}/>
-            <div className={"pb-3"}>
+            <div className={"pb-3 pt-1 new-text-aqua"}>
                 { diceErr &&
                     <div>
-                        ^^^ Please enter a valid number of dice to roll! ^^^
+                        ^^^ Please enter a valid number of times to roll! ^^^
                     </div>
                 }
             </div>
-            <div className={"new-text-aqua text-xl"}>{ prob === 0 ? "NaN" : `~${Math.floor(prob * 100)}/100 (${prob})` }</div>
+            <div className={"new-text-aqua text-xl"}>{ prob === 0 ? "None found" : `~${Math.floor(prob * 100)}/100 (${prob})` }</div>
         </div>
     );
 }
