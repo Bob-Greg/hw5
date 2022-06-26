@@ -12,6 +12,8 @@ function App() {
     const [diceRolls, setDiceRolls] = useState(0)
     const [diceErr, setDiceErr] = useState(false)
     const [prob, setProb] = useState(0.0)
+    const [probStr, setProbStr] = useState("")
+    const [state, setState] = useState("")
 
     function updateDiceProb(numDice:number, numErr:boolean, targetVal:number, targetErr:boolean, diceRolls:number, diceErr:boolean, prob:number) {
         if (diceErr || numErr || targetErr) {
@@ -36,7 +38,9 @@ function App() {
                 a = []
             }
 
-            setProb(count / diceRolls)
+            setProb(count / diceRolls * 100)
+            setProbStr("")
+            setState("Simulated")
             return;
         }
 
@@ -65,7 +69,15 @@ function App() {
             }
             swap()
         }
-        setProb(Math.min(1.0, (mult[targetVal] / Math.pow(6, numDice))))
+        let prob1 = Math.min(1.0, Math.floor(mult[targetVal] / Math.pow(6, numDice) * 1000000) / 1000000) * 100
+        if (prob1 < 1) {
+            setProbStr(`${mult[targetVal]}/${Math.pow(6, numDice)}`)
+            setState("Calculated")
+            return
+        }
+        setProbStr("")
+        setProb(prob1)
+        setState("Calculated")
     }
 
     return (
@@ -78,6 +90,7 @@ function App() {
                     https://www.github.com/Bob-Greg/hw5
                 </div>
             </a>
+            <div className={"new-text-aqua text-xl text-center pb-1"}># of dice to roll</div>
             <TextBox defaultText={"Number of dice to roll"} customCss={"bg-gray-200 rounded-xl pl-1 new-button-aqua"} onChange={str => {
                 if (isNaN(parseInt(str)) || parseInt(str) === 0) {
                     setNumErr(true)
@@ -93,6 +106,7 @@ function App() {
                     <div>^^^ Please enter a valid number of dice to roll! ^^^</div>
                 }
             </div>
+            <div className={"new-text-aqua text-xl text-center pb-1"}>Target value</div>
             <TextBox defaultText={"Target value"} customCss={"bg-gray-200 rounded-xl pl-1 new-button-aqua"} onChange={str => {
                 if (isNaN(parseInt(str)) || parseInt(str) === 0) {
                     setTargetErr(true)
@@ -110,6 +124,7 @@ function App() {
                     </div>
                 }
             </div>
+            <div className={"new-text-aqua text-xl text-center pb-1"}># of times to roll</div>
             <TextBox defaultText={"Number of times to roll"} customCss={"bg-gray-200 rounded-xl pl-1 new-button-aqua"} onChange={str => {
                 if (isNaN(parseInt(str)) || parseInt(str) === 0) {
                     setDiceErr(true)
@@ -127,7 +142,24 @@ function App() {
                     </div>
                 }
             </div>
-            <div className={"new-text-aqua text-xl"}>{ prob === 0 ? "None found" : `~${Math.floor(prob * 100)}/100 (${prob})` }</div>
+            <div className={"pb-1"}>
+                { probStr === "" &&
+                    <div className={"new-text-aqua text-xl"}>
+                        { prob === 0 ? "None found" : `~${Math.floor(prob)}/100 (${Math.floor(prob * 10000) / 10000}%)` }
+                    </div>
+                }
+                { probStr !== "" &&
+                    <div className={"new-text-aqua text-xl"}>
+                        { probStr }
+                    </div>
+                }
+            </div>
+            <div className={"new-text-aqua text-md"}>
+                { state }
+            </div>
+            <div className={"bottom-center text-center new-text-aqua text-xl"}>
+                Tu ne devrais t'inquiéter pas de la performance parce que Typescript doit être plus vite que les blocs.
+            </div>
         </div>
     );
 }
