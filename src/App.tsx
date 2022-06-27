@@ -94,12 +94,12 @@ function App() {
                 Rolling Dice
             </div>
             <a href={"https://www.github.com/Bob-Greg/hw5"}>
-                <div className={"new-text-aqua sm:text-sm md:text-xl pb-7"}>
+                <div className={"new-text-aqua sm:text md:text-xl pb-7"}>
                     https://github.com/Bob-Greg/hw5
                 </div>
             </a>
             <div className={"new-text-aqua text-xl text-center pb-1"}># of dice to roll</div>
-            <TextBox defaultText={"Number of dice to roll"} customCss={"bg-gray-200 rounded-xl pl-1 new-button-aqua"} onChange={str => {
+            <TextBox defaultText={"Number of dice to roll"} customCss={"bg-gray-200 rounded-xl pl-1.5 pr-1.5 new-button-aqua"} onChange={str => {
                 if (isNaN(parseInt(str)) || parseInt(str) === 0) {
                     setNumErr(true)
                     updateDiceProb(0, true, 0, true, 0, true, prob)
@@ -109,13 +109,13 @@ function App() {
                 setNumErr(false)
                 updateDiceProb(parseInt(str), false, targetVal, targetErr, diceRolls, diceErr, prob)
             }}/>
-            <div className={"pb-3 pt-2 new-text-aqua text-xs"}>
+            <div className={"pb-3 pt-2 lg:pt-0.5 new-text-aqua text-xs lg:text-lg"}>
                 { numErr &&
                     <div>^^^ Please enter a valid number of dice to roll! ^^^</div>
                 }
             </div>
             <div className={"new-text-aqua text-xl text-center pb-1"}>Target value</div>
-            <TextBox defaultText={"Target value"} customCss={"bg-gray-200 rounded-xl pl-1 new-button-aqua"} onChange={str => {
+            <TextBox defaultText={"Target value"} customCss={"bg-gray-200 rounded-xl pl-1.5 pr-1.5 new-button-aqua"} onChange={str => {
                 if (isNaN(parseInt(str)) || parseInt(str) === 0) {
                     setTargetErr(true)
                     updateDiceProb(0, true, 0, true, 0, true, prob)
@@ -125,7 +125,7 @@ function App() {
                 setTargetErr(false)
                 updateDiceProb(numDice, numErr, parseInt(str), false, diceRolls, diceErr, prob)
             }}/>
-            <div className={"pb-3 pt-2 new-text-aqua text-xs"}>
+            <div className={"pb-3 pt-2 lg:pt-0.5 new-text-aqua text-xs lg:text-lg"}>
                 { targetErr &&
                     <div>
                         ^^^ Please enter a valid target value! ^^^
@@ -133,7 +133,7 @@ function App() {
                 }
             </div>
             <div className={"new-text-aqua text-xl text-center pb-1"}># of times to roll</div>
-            <TextBox defaultText={"Number of times to roll"} customCss={"bg-gray-200 rounded-xl pl-1 new-button-aqua"} onChange={str => {
+            <TextBox defaultText={"Number of times to roll"} customCss={"bg-gray-200 rounded-xl pl-1.5 pr-1.5 new-button-aqua"} onChange={str => {
                 if (isNaN(parseInt(str)) || parseInt(str) === 0) {
                     setDiceErr(true)
                     updateDiceProb(0, true, 0, true, 0, true, prob)
@@ -143,7 +143,7 @@ function App() {
                 setDiceErr(false)
                 updateDiceProb(numDice, numErr, targetVal, targetErr, parseInt(str), false, prob)
             }}/>
-            <div className={"pb-4 pt-2 new-text-aqua text-xs"}>
+            <div className={"pb-4 pt-2 lg:pt-0.5 new-text-aqua text-xs lg:text-lg"}>
                 { diceErr &&
                     <div>
                         ^^^ Please enter a valid number of times to roll! ^^^
@@ -162,7 +162,7 @@ function App() {
                     </div>
                 }
             </div>
-            <div className={"new-text-aqua text-md"}>
+            <div className={"new-text-aqua text-md pb-5"}>
                 { state }
             </div>
         </div>

@@ -69,10 +69,30 @@ code {
   box-shadow: 0 1px rgb(251 191 36), 0 2px rgb(245 158 11), 0 3px rgb(245 158 11), 0 4px rgb(217 119 6), 0 5px rgb(217 119 6), 0 7px 7px rgba(0, 0, 0, 0.6);
 }
 
+.new-box-ffox {
+  background-color: #d619cd;
+  box-shadow: 0 1px #ba0fb2, 0 2px #ba0fb2, 0 3px #a90ea2, 0 4px #a90ea2, 0 5px #990a92, 0 6px #990a92, 0 8px 7px rgba(0, 0, 0, 0.6);
+}
+
+.new-text-ffox {
+  color: #ffbf00;
+  text-shadow: 0 1px #ffa600, 0 2px #ffa600, 0 3px #ff8800, 0 4px #ff8800, 0 5px #ff6200, 0 6px #ff6200, 0 8px 7px rgba(0, 0, 0, 0.6);
+}
+
+.new-text-ffox-sm {
+  color: #ffbf00;
+  text-shadow: 0 1px #ff8800, 0 2px #ff8800, 0 3px #ff6200, 0 4px #ff6200, 0 6px 7px rgba(0, 0, 0, 0.6);
+}
+
+.new-button-ffox {
+  background-color: #ffbf00;
+  box-shadow: 0 1px #ffa600, 0 2px #ffa600, 0 3px #ff8800, 0 4px #ff8800, 0 5px #ff6200, 0 6px #ff6200, 0 8px 7px rgba(0, 0, 0, 0.6);
+}
+
 .bottom-center {
   position: fixed;
   left: 50%;
-  bottom: 0px;
+  bottom: 0;
   transform: translate(-50%, -50%);
   margin: 0 auto;
 }
