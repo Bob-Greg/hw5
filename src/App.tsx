@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {TextBox} from "./text-box";
 
@@ -18,6 +17,7 @@ function App() {
     function updateDiceProb(numDice:number, numErr:boolean, targetVal:number, targetErr:boolean, diceRolls:number, diceErr:boolean, prob:number) {
         if (diceErr || numErr || targetErr) {
             setProb(0)
+            setState("")
             return
         }
 
@@ -83,13 +83,19 @@ function App() {
     }
 
     return (
-        <div className={"mt-6 mb-6 ml-6 mr-6 pt-6 grid grid-cols-1 content-start space w-full-margin h-full-margin fixed place-items-center new-box-aqua"}>
-            <div className={"new-text-aqua text-4xl pb-1"}>
-                Dice Roll Simulator
+        <div className={
+            "mt-6 mb-6 ml-6 mr-6 pt-6 " +
+            "grid grid-cols-1 content-start space place-items-center " +
+            "w-full-margin h-full-margin fixed " +
+            "new-box-aqua " +
+            "overflow-auto"
+        }>
+            <div className={"new-text-aqua text-4xl pb-2"}>
+                Rolling Dice
             </div>
             <a href={"https://www.github.com/Bob-Greg/hw5"}>
-                <div className={"new-text-aqua text-xl pb-7"}>
-                    https://www.github.com/Bob-Greg/hw5
+                <div className={"new-text-aqua sm:text-sm md:text-xl pb-7"}>
+                    https://github.com/Bob-Greg/hw5
                 </div>
             </a>
             <div className={"new-text-aqua text-xl text-center pb-1"}># of dice to roll</div>
@@ -103,7 +109,7 @@ function App() {
                 setNumErr(false)
                 updateDiceProb(parseInt(str), false, targetVal, targetErr, diceRolls, diceErr, prob)
             }}/>
-            <div className={"pb-3 pt-1 new-text-aqua"}>
+            <div className={"pb-3 pt-2 new-text-aqua text-xs"}>
                 { numErr &&
                     <div>^^^ Please enter a valid number of dice to roll! ^^^</div>
                 }
@@ -119,7 +125,7 @@ function App() {
                 setTargetErr(false)
                 updateDiceProb(numDice, numErr, parseInt(str), false, diceRolls, diceErr, prob)
             }}/>
-            <div className={"pb-3 pt-1 new-text-aqua"}>
+            <div className={"pb-3 pt-2 new-text-aqua text-xs"}>
                 { targetErr &&
                     <div>
                         ^^^ Please enter a valid target value! ^^^
@@ -137,7 +143,7 @@ function App() {
                 setDiceErr(false)
                 updateDiceProb(numDice, numErr, targetVal, targetErr, parseInt(str), false, prob)
             }}/>
-            <div className={"pb-3 pt-1 new-text-aqua"}>
+            <div className={"pb-4 pt-2 new-text-aqua text-xs"}>
                 { diceErr &&
                     <div>
                         ^^^ Please enter a valid number of times to roll! ^^^
@@ -158,9 +164,6 @@ function App() {
             </div>
             <div className={"new-text-aqua text-md"}>
                 { state }
-            </div>
-            <div className={"bottom-center text-center new-text-aqua text-xl"}>
-                Tu ne devrais t'inquiéter pas de la performance parce que Typescript doit être plus vite que les blocs.
             </div>
         </div>
     );
