@@ -23,19 +23,20 @@ function App() {
 
         if (diceRolls < 100000) {
             let count = 0
+            let rand = Math.floor(Math.random() * 12) + 1
             for (let i = 0; i < diceRolls; i++) {
-                let a: number[] = []
-                for (let j = 0; j < numDice; j++) {
-                    a.push(Math.floor(Math.random() * 6) + 1)
-                }
                 let sum = 0
                 for (let j = 0; j < numDice; j++) {
-                    sum += a[j]
+                    // use xorshift to generate a random number
+                    rand ^= rand << 13;
+                    rand ^= rand >> 7;
+                    rand ^= rand << 17;
+                    rand = Math.abs(rand)
+                    sum += rand % 6 + 1
                 }
                 if (sum === targetVal) {
                     count++
                 }
-                a = []
             }
 
             setProb(count / diceRolls * 100)
@@ -72,6 +73,7 @@ function App() {
         let prob1 = Math.min(1.0, Math.floor(mult[targetVal] / Math.pow(6, numDice) * 1000000) / 1000000) * 100
         if (prob1 < 1) {
             setProbStr(`${mult[targetVal]}/${Math.pow(6, numDice)}`)
+            setProb(prob1)
             setState("Calculated")
             return
         }
@@ -150,7 +152,7 @@ function App() {
                 }
                 { probStr !== "" &&
                     <div className={"new-text-aqua text-xl"}>
-                        { probStr }
+                        { `${probStr} (${Math.floor(prob * 10000) / 10000}%)` }
                     </div>
                 }
             </div>
